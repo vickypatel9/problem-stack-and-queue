@@ -1,0 +1,28 @@
+class Compute {
+    
+    public long[] printFirstNegativeInteger(long A[], int N, int K)
+    {
+        long[] result = new long[N-K+1];
+        List<Long> ls = new ArrayList<>();
+        int i = 0;
+        int j = 0;
+        int index = 0;
+        while (j < N) {
+            if (A[j] < 0) {
+                ls.add(A[j]);
+            }
+            if (j-i+1 < K) {
+                j++;
+            } else if (j-i+1 == K) {
+                // hit the window and get 1st answer
+                result[index++] = ls.isEmpty() ? 0 : ls.get(0);
+                if (!ls.isEmpty() && A[i] == ls.get(0)) {
+                    ls.remove(0);
+                }
+                i++;
+                j++;
+            }
+        }
+        return result;
+    }
+}
